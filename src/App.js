@@ -8,7 +8,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   return (
     <div style={{ maxwidth: "30rem", margin: "4rem auto" }}>
-      {/* <h2>CRUD Application</h2> */}
       <Router>
         {/* <h1>Navgation Bar</h1> */}
         <Routes>
