@@ -1,13 +1,14 @@
-import "./App.css";
+// import "./App.css";
 import Home from "./component/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Adduser from "./component/Adduser";
 import Edituser from "./component/Edituser";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
-    <div style={{ maxwidth: "30rem", margin: "4rem 4rem auto" }}>
+    <div style={{ maxWidth: "30rem", margin: "4rem auto" }}>
       <Router>
         {/* <h1>Navgation Bar</h1> */}
         <Routes>

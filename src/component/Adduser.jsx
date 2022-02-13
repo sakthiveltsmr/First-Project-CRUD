@@ -12,7 +12,7 @@ const Adduser = () => {
       <Button type="submit" style={{ margin: "0.5rem 1rem" }}>
         Add
       </Button>
-      <Link to="/" className="btn btn-danger">
+      <Link to="/" className="btn btn-danger ml-2">
         Remove
       </Link>
     </Form>
