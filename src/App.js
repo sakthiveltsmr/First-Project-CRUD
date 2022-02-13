@@ -1,9 +1,22 @@
 import "./App.css";
+import Home from "./component/Home";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Adduser from "./component/Adduser";
+import Edituser from "./component/Edituser";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
-    <div className="App">
-      <h2>CRUD Application</h2>
+    <div style={{ maxwidth: "30rem", margin: "4rem auto" }}>
+      {/* <h2>CRUD Application</h2> */}
+      <Router>
+        {/* <h1>Navgation Bar</h1> */}
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/add" element={<Adduser />} />
+          <Route path="/edit/:id" element={<Edituser />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
