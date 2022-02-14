@@ -1,12 +1,12 @@
 import React from "react";
 import Heading from "./Heading";
-import Userlist from "./Userlist";
+import UserList from "./Userlist";
 
 const Home = () => {
   return (
     <>
       <Heading />
-      <Userlist />
+      <UserList />
     </>
   );
 };

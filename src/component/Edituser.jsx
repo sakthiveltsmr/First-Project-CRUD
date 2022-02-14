@@ -1,22 +1,51 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Form, FormGroup, Input, Label, Button } from "reactstrap";
+import React, { useState, useContext, useEffect } from "react";
+import { GlobalContext } from "../context/GlobalState";
+import { Link, useNavigate } from "react-router-dom";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
-const Edituser = () => {
+const EditUser = (props) => {
+  const { editUser, users } = useContext(GlobalContext);
+  const [selectedUser, setSelectedUser] = useState({
+    id: "",
+    name: "",
+  });
+  const history = useNavigate();
+  const currentUserId = props.match.params.id;
+
+  useEffect(() => {
+    const userId = currentUserId;
+    const selectedUser = users.find((user) => user.id === userId);
+    setSelectedUser(selectedUser);
+  }, [currentUserId, users]);
+
+  const onChange = (e) => {
+    setSelectedUser({ ...selectedUser, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    editUser(selectedUser);
+    history("/");
+  };
+
   return (
-    <Form>
+    <Form onSubmit={onSubmit}>
       <FormGroup>
         <Label>Name</Label>
-        <Input type="text" placeholder="update your name"></Input>
+        <Input
+          type="text"
+          value={selectedUser.name}
+          onChange={onChange}
+          name="name"
+          placeholder="Enter user"
+          required
+        ></Input>
       </FormGroup>
-      <Button type="submit" style={{ margin: "0.5rem 1rem" }}>
-        Edit
-      </Button>
-      <Link to="/" className="btn btn-danger">
-        Remove
+      <Button type="submit">Edit Name</Button>
+      <Link to="/" className="btn btn-danger ml-2">
+        Cancel
       </Link>
     </Form>
   );
 };
-
-export default Edituser;
+export default EditUser;

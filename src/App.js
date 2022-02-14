@@ -1,24 +1,31 @@
-// import "./App.css";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// import { Home } from "./component/Home";
+// import { AddUser } from "./component/AddUser";
+// import { EditUser } from "./component/EditUser";
 import Home from "./component/Home";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Adduser from "./component/Adduser";
-import Edituser from "./component/Edituser";
+import AddUser from "./component/Adduser";
+import EditUser from "./component/Edituser";
+import { GlobalProvider } from "./context/GlobalState";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+// import { Routes } from "react-router";
 
-function App() {
+const App = () => {
   return (
     <div style={{ maxWidth: "30rem", margin: "4rem auto" }}>
-      <Router>
-        {/* <h1>Navgation Bar</h1> */}
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route path="/add" element={<Adduser />} />
-          <Route path="/edit/:id" element={<Edituser />} />
-        </Routes>
-      </Router>
+      <GlobalProvider>
+        <Router>
+          <Routes>
+            {/* <Route exact path="/" component={() => <Home users={users} setUsers={setUsers} />} /> */}
+            <Route exact path="/" element={<Home />} />
+            <Route path="/add" element={<AddUser />} />
+            <Route path="/edit/:id" element={<EditUser />} />
+          </Routes>
+        </Router>
+      </GlobalProvider>
     </div>
   );
-}
+};
 
 export default App;

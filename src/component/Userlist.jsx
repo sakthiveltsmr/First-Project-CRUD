@@ -1,51 +1,37 @@
-import React from "react";
+import React, { useContext } from "react";
+import { GlobalContext } from "../context/GlobalState";
 import { Link } from "react-router-dom";
 import { ListGroup, ListGroupItem, Button } from "reactstrap";
 
-const Userlist = () => {
+const UserList = () => {
+  const { users, removeUser } = useContext(GlobalContext);
+
   return (
-    <ListGroup className="mt-5">
-      <ListGroupItem className="d-flex">
-        <strong>User 1</strong>
-        <div className="ml-auto" style={{ marginLeft: "15rem" }}>
-          <Link
-            to="/edit/1"
-            className=" btn btn-warning "
-            style={{ marginRight: "0.5rem" }}
-          >
-            Edit
-          </Link>
-          <Button color="danger">Delete</Button>
-        </div>
-      </ListGroupItem>
-      <ListGroupItem className="d-flex">
-        <strong>User 2</strong>
-        <div className="ml-auto" style={{ marginLeft: "15rem" }}>
-          <Link
-            to="/edit/2"
-            className=" btn btn-warning "
-            style={{ marginRight: "0.5rem" }}
-          >
-            Edit
-          </Link>
-          <Button color="danger">Delete</Button>
-        </div>
-      </ListGroupItem>
-      <ListGroupItem className="d-flex">
-        <strong>User 3</strong>
-        <div className="ml-auto" style={{ marginLeft: "15rem" }}>
-          <Link
-            to="/edit/3"
-            className=" btn btn-warning "
-            style={{ marginRight: "0.5rem" }}
-          >
-            Edit
-          </Link>
-          <Button color="danger">Delete</Button>
-        </div>
-      </ListGroupItem>
+    <ListGroup className="mt-4">
+      {users.length > 0 ? (
+        <>
+          {users.map((user) => (
+            <ListGroupItem className="d-flex" key={user.id}>
+              <strong>{user.name}</strong>
+              <div className="ml-auto">
+                <Link
+                  to={`/edit/${user.id}`}
+                  color="warning"
+                  className="btn btn-warning mr-1"
+                >
+                  Edit
+                </Link>
+                <Button onClick={() => removeUser(user.id)} color="danger">
+                  Delete
+                </Button>
+              </div>
+            </ListGroupItem>
+          ))}
+        </>
+      ) : (
+        <h4 className="text-center">No Users</h4>
+      )}
     </ListGroup>
   );
 };
-
-export default Userlist;
+export default UserList;

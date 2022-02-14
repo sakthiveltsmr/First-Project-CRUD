@@ -1,21 +1,46 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Form, FormGroup, Input, Label, Button } from "reactstrap";
+import React, { useState, useContext } from "react";
+import { GlobalContext } from "../context/GlobalState";
+import { v4 as uuid } from "uuid";
+import { Link, useNavigate } from "react-router-dom";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
-const Adduser = () => {
+const AddUser = () => {
+  const [name, setName] = useState("");
+  const { addUser } = useContext(GlobalContext);
+  const history = useNavigate();
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const newUser = {
+      id: uuid(),
+      name,
+    };
+    addUser(newUser);
+    history("/");
+  };
+
+  const onChange = (e) => {
+    setName(e.target.value);
+  };
+
   return (
-    <Form>
+    <Form onSubmit={onSubmit}>
       <FormGroup>
         <Label>Name</Label>
-        <Input type="text" placeholder="enter your name"></Input>
+        <Input
+          type="text"
+          value={name}
+          onChange={onChange}
+          name="name"
+          placeholder="Enter user"
+          required
+        ></Input>
       </FormGroup>
-      <Button type="submit" style={{ margin: "0.5rem 1rem" }}>
-        Add
-      </Button>
-      <Link to="/" className="btn btn-danger ml-2">
-        Remove
+      <Button type="submit">Submit</Button>
+      <Link to="/" className="btn btn-danger">
+        Cancel
       </Link>
     </Form>
   );
 };
-export default Adduser;
+export default AddUser;

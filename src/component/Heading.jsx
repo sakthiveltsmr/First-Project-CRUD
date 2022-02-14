@@ -9,11 +9,7 @@ const Heading = () => {
         <NavbarBrand href="/">My Team</NavbarBrand>
         <Nav>
           <NavItem>
-            <Link
-              style={{ marginLeft: "15.2rem" }}
-              className="btn btn-primary "
-              to="/add"
-            >
+            <Link className="btn btn-primary " to="/add">
               Add User
             </Link>
           </NavItem>
