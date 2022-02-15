@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { GlobalContext } from "../context/GlobalState";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
 const EditUser = (props) => {
@@ -10,7 +10,9 @@ const EditUser = (props) => {
     name: "",
   });
   const history = useNavigate();
-  const currentUserId = props.match.params.id;
+  const Params = useParams();
+  console.log(Params);
+  const currentUserId = Params.id;
 
   useEffect(() => {
     const userId = currentUserId;
@@ -19,7 +21,7 @@ const EditUser = (props) => {
   }, [currentUserId, users]);
 
   const onChange = (e) => {
-    setSelectedUser({ ...selectedUser, [e.target.name]: e.target.value });
+    setSelectedUser({ ...selectedUser, name: e.target.value });
   };
 
   const onSubmit = (e) => {
